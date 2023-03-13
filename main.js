@@ -57,30 +57,38 @@ const cardList = [
   { name: "diamond-A", link: "./card/card_diamond_01.png", height: 13 },
 ];
 //使い終わったカードをここで収納
-const cemeteryCard = [];
+const cemetery = [];
+
+//カードの場のhtmlを取得
 const openCardArea = document.getElementById("js_openCardArea");
 const hiddenCardArea = document.getElementById("js_hiddenCardArea");
+const cemeteryCardArea = document.getElementById("cemetery");
+
 const cardData = cardList.map(
   (card) => `<img src="${card.link}" alt="${card.name}">`
 );
 
-let num = 53;
-
-//墓地の配列に入れる処理が2回目からundefinedになる。なんでかわからない、、次回ここから
-const changeCard = (num) => {
+//墓地にカードのデータは入れれたけどそれをどうやって画面に描画するか
+const openCard = (num) => {
   const openRandomNum = Math.floor(Math.random() * num);
-  const hiddenRandomNum = Math.floor(Math.random() * num);
   openCardArea.innerHTML = cardData[openRandomNum];
-  hiddenCardArea.innerHTML = cardData[hiddenRandomNum];
-  cemeteryCard.push(cardList[openRandomNum]);
-  cemeteryCard.push(cardList[hiddenRandomNum]);
-  cardList.splice(openRandomNum);
-  cardList.splice(hiddenRandomNum);
-  console.log(cemeteryCard);
+  cemetery.push(cardData[openRandomNum]);
+  cardList.splice(openRandomNum, 1);
+  cemeteryCardArea.innerHTML = cemetery[0];
 };
 
+const hiddenCard = (num) => {
+  const hiddenRandomNum = Math.floor(Math.random() * num);
+  hiddenCardArea.innerHTML = cardData[hiddenRandomNum];
+  cemetery.push(cardData[hiddenRandomNum]);
+  cardList.splice(hiddenRandomNum, 1);
+  cemeteryCardArea.innerHTML = cemetery[1];
+};
+
+let num = 53;
 const button = document.getElementById("button");
 button.addEventListener("click", () => {
-  changeCard(num);
+  openCard(num);
   num--;
+  hiddenCard(num);
 });
