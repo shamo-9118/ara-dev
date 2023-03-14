@@ -64,31 +64,42 @@ const openCardArea = document.getElementById("js_openCardArea");
 const hiddenCardArea = document.getElementById("js_hiddenCardArea");
 const cemeteryCardArea = document.getElementById("cemetery");
 
-const cardData = cardList.map(
-  (card) => `<img src="${card.link}" alt="${card.name}">`
-);
-
-//墓地にカードのデータは入れれたけどそれをどうやって画面に描画するか
-const openCard = (num) => {
-  const openRandomNum = Math.floor(Math.random() * num);
-  openCardArea.innerHTML = cardData[openRandomNum];
-  cemetery.push(cardData[openRandomNum]);
-  cardList.splice(openRandomNum, 1);
-  cemeteryCardArea.innerHTML = cemetery[0];
+const openCard = (openRandomNum) => {
+  openCardArea.innerHTML = pickUpCard(openRandomNum);
 };
 
-const hiddenCard = (num) => {
-  const hiddenRandomNum = Math.floor(Math.random() * num);
-  hiddenCardArea.innerHTML = cardData[hiddenRandomNum];
-  cemetery.push(cardData[hiddenRandomNum]);
-  cardList.splice(hiddenRandomNum, 1);
-  cemeteryCardArea.innerHTML = cemetery[1];
+const hiddenCard = (hiddenRandomNum) => {
+  hiddenCardArea.innerHTML = pickUpCard(hiddenRandomNum);
+};
+
+const pickUpCard = (pickUpNumber) => {
+  const cardLink = cardList[pickUpNumber].link;
+  const cardName = cardList[pickUpNumber];
+  cardList.splice(pickUpNumber, 1);
+  cemetery.push(cardList[pickUpNumber]);
+  return `<img src="${cardLink}" alt="${cardName}">`;
 };
 
 let num = 53;
-const button = document.getElementById("button");
-button.addEventListener("click", () => {
-  openCard(num);
+const highButton = document.getElementById("high");
+const rowButton = document.getElementById("row");
+highButton.addEventListener("click", () => {
+  const openRandomNum = Math.floor(Math.random() * num);
+  openCard(openRandomNum);
   num--;
-  hiddenCard(num);
+  const hiddenRandomNum = Math.floor(Math.random() * num);
+  hiddenCard(hiddenRandomNum);
+  num--;
+  compareCards(openRandomNum,hiddenRandomNum)
 });
+
+rowButton.addEventListener("click", () => {
+  const openRandomNum = Math.floor(Math.random() * num);
+  openCard(openRandomNum);
+  num--;
+  const hiddenRandomNum = Math.floor(Math.random() * num);
+  hiddenCard(hiddenRandomNum);
+  num--;
+  compareCards(openRandomNum,hiddenRandomNum)
+});
+
