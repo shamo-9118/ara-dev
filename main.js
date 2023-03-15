@@ -56,13 +56,53 @@ const cardList = [
   { name: 'diamond-king', link: './card/card_diamond_13.png', height: 12 },
   { name: 'diamond-A', link: './card/card_diamond_01.png', height: 13 },
 ]
-//使い終わったカードをここで収納
-const cemetery = []
 
-//カードの場のhtmlを取得
+//DOMの取得
 const openCardArea = document.getElementById('js_openCardArea')
 const hiddenCardArea = document.getElementById('js_hiddenCardArea')
 const cemeteryCardArea = document.getElementById('cemetery')
+const startButton = document.getElementById('start')
+const buttonArea = document.getElementById('js_button-area')
+
+//使い終わったカードをここで収納
+const cemetery = []
+
+//カードの枚数を定義
+let num = 52
+
+//スタートボタンを押すことでカード2枚とrow&hightのボタンを出現させてスタートボタンはhiddenにする
+startButton.addEventListener('click', () => {
+  const buttonName = ['row', 'hight']
+  const buttonDom = buttonName.map(
+    (name) => `<button id="${name}">${name}</button>`
+  )
+  const rowButtonDiv = document.createElement('div')
+  const hightButtonDiv = document.createElement('div')
+  rowButtonDiv.innerHTML = buttonDom[0]
+  hightButtonDiv.innerHTML = buttonDom[1]
+  buttonArea.appendChild(rowButtonDiv)
+  buttonArea.appendChild(hightButtonDiv)
+  startButton.setAttribute('hidden', 'hidden')
+
+  const openRandomNum = Math.floor(Math.random() * num)
+  openCard(openRandomNum)
+  num--
+
+  const hiddenRandomNum = Math.floor(Math.random() * num)
+  hiddenCard(hiddenRandomNum)
+  num--
+
+  const hightButton = document.getElementById('hight')
+  hightButton.addEventListener('click', () => {
+    console.log('this is hight')
+    compareCards(openRandomNum, hiddenRandomNum)
+  })
+  const rowButton = document.getElementById('row')
+  rowButton.addEventListener('click', () => {
+    console.log('this is row')
+    compareCards(openRandomNum, hiddenRandomNum)
+  })
+})
 
 const openCard = (openRandomNum) => {
   openCardArea.innerHTML = pickUpCard(openRandomNum)
@@ -80,26 +120,25 @@ const pickUpCard = (pickUpNumber) => {
   return `<img src="${cardLink}" alt="${cardName}">`
 }
 
-let num = 53
-const highButton = document.getElementById('high')
-const rowButton = document.getElementById('row')
-const startButton = document.getElementById('start')
-highButton.addEventListener('click', () => {
-  const openRandomNum = Math.floor(Math.random() * num)
-  openCard(openRandomNum)
-  num--
-  const hiddenRandomNum = Math.floor(Math.random() * num)
-  hiddenCard(hiddenRandomNum)
-  num--
-  compareCards(openRandomNum, hiddenRandomNum)
-})
-
 rowButton.addEventListener('click', () => {
-  const openRandomNum = Math.floor(Math.random() * num)
-  openCard(openRandomNum)
-  num--
-  const hiddenRandomNum = Math.floor(Math.random() * num)
-  hiddenCard(hiddenRandomNum)
-  num--
-  compareCards(openRandomNum, hiddenRandomNum)
+  console.log('hello')
 })
+// highButton.addEventListener('click', () => {
+//   const openRandomNum = Math.floor(Math.random() * num)
+//   openCard(openRandomNum)
+//   num--
+//   const hiddenRandomNum = Math.floor(Math.random() * num)
+//   hiddenCard(hiddenRandomNum)
+//   num--
+//   compareCards(openRandomNum, hiddenRandomNum)
+// })
+
+// rowButton.addEventListener('click', () => {
+//   const openRandomNum = Math.floor(Math.random() * num)
+//   openCard(openRandomNum)
+//   num--
+//   const hiddenRandomNum = Math.floor(Math.random() * num)
+//   hiddenCard(hiddenRandomNum)
+//   num--
+//   compareCards(openRandomNum, hiddenRandomNum)
+// })
