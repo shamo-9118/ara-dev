@@ -114,10 +114,11 @@ const hiddenCard = (hiddenRandomNum) => {
 
 const pickUpCard = (pickUpNumber) => {
   const cardLink = cardList[pickUpNumber].link
-  const cardName = cardList[pickUpNumber]
+  const cardName = cardList[pickUpNumber].name
+  const cardHeight = cardList[pickUpNumber].height
   cardList.splice(pickUpNumber, 1)
   cemetery.push(cardList[pickUpNumber])
-  return `<img src="${cardLink}" alt="${cardName}">`
+  return `<img src="${cardLink}" alt="${cardName}" data-set="${cardHeight}">`
 }
 
 rowButton.addEventListener('click', () => {
