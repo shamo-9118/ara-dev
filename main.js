@@ -92,6 +92,9 @@ startButton.addEventListener('click', () => {
   hiddenCard(hiddenRandomNum)
   num--
 
+
+  //スタートボタンを押した時に生成したhightButtonとrowButtonを取得してそれぞにれカードを比較するイベントを追加する
+  //比較したあとはcemeteryにappendChildで挿入してulに入れることで捨て札的な扱いで表示できるようにする
   const hightButton = document.getElementById('hight')
   hightButton.addEventListener('click', () => {
     console.log('this is hight')
@@ -103,6 +106,8 @@ startButton.addEventListener('click', () => {
     compareCards(openRandomNum, hiddenRandomNum)
   })
 })
+
+
 
 const openCard = (openRandomNum) => {
   openCardArea.innerHTML = pickUpCard(openRandomNum)
