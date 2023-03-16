@@ -1,6 +1,24 @@
 body {
 }
 
-.card-area img {
+.card-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.open-card-area,
+.hidden-card-area {
+  height: 300px;
+}
+.open-card-area img,
+.hidden-card-area img {
   width: 200px;
+
+}
+
+.button-area {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
