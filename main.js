@@ -92,22 +92,48 @@ startButton.addEventListener('click', () => {
   hiddenCard(hiddenRandomNum)
   num--
 
-
   //スタートボタンを押した時に生成したhightButtonとrowButtonを取得してそれぞにれカードを比較するイベントを追加する
   //比較したあとはcemeteryにappendChildで挿入してulに入れることで捨て札的な扱いで表示できるようにする
   const hightButton = document.getElementById('hight')
   hightButton.addEventListener('click', () => {
-    console.log('this is hight')
-    compareCards(openRandomNum, hiddenRandomNum)
+    //カード比較をするためにdatasetから値を取得する
+    const openedCardHight = document
+      .getElementById('js_openCardArea')
+      .children[0].getAttribute('data-set')
+    const openedCardNum = Number(openedCardHight)
+
+    const hiddenCardHight = document
+      .getElementById('js_hiddenCardArea')
+      .children[0].getAttribute('data-set')
+    const hiddenCardNum = Number(hiddenCardHight)
+
+    if (hiddenCardNum < openedCardNum) {
+      alert('win! hiddenの方が小さいです')
+    } else if (openedCardNum < hiddenCardNum) {
+      alert('lose! openの方がの方が大きいです')
+    }
   })
+
   const rowButton = document.getElementById('row')
   rowButton.addEventListener('click', () => {
-    console.log('this is row')
-    compareCards(openRandomNum, hiddenRandomNum)
+    //カード比較をするためにdatasetから値を取得する
+    const openedCardHight = document
+      .getElementById('js_openCardArea')
+      .children[0].getAttribute('data-set')
+    const openedCardNum = Number(openedCardHight)
+
+    const hiddenCardHight = document
+      .getElementById('js_hiddenCardArea')
+      .children[0].getAttribute('data-set')
+    const hiddenCardNum = Number(hiddenCardHight)
+
+    if (openedCardNum < hiddenCardNum) {
+      alert('win! hiddenの方が小さいです')
+    } else if (hiddenCardNum < openedCardNum) {
+      alert('lose! openの方がの方が大きいです')
+    }
   })
 })
-
-
 
 const openCard = (openRandomNum) => {
   openCardArea.innerHTML = pickUpCard(openRandomNum)
@@ -126,9 +152,9 @@ const pickUpCard = (pickUpNumber) => {
   return `<img src="${cardLink}" alt="${cardName}" data-set="${cardHeight}">`
 }
 
-rowButton.addEventListener('click', () => {
-  console.log('hello')
-})
+// rowButton.addEventListener('click', () => {
+//   console.log('hello')
+// })
 // highButton.addEventListener('click', () => {
 //   const openRandomNum = Math.floor(Math.random() * num)
 //   openCard(openRandomNum)
