@@ -74,7 +74,7 @@ let num = 52
 startButton.addEventListener('click', () => {
   const buttonName = ['row', 'hight']
   const buttonDom = buttonName.map(
-    (name) => `<button id="${name}">${name}</button>`
+    (name) => `<button class="${name}" id="${name}">${name}</button>`
   )
   const rowButtonDiv = document.createElement('div')
   const hightButtonDiv = document.createElement('div')
@@ -92,9 +92,9 @@ startButton.addEventListener('click', () => {
   hiddenCard(hiddenRandomNum)
   num--
 
-  //スタートボタンを押した時に生成したhightButtonとrowButtonを取得してそれぞにれカードを比較するイベントを追加する
   //比較したあとはcemeteryにappendChildで挿入してulに入れることで捨て札的な扱いで表示できるようにする
   const hightButton = document.getElementById('hight')
+
   hightButton.addEventListener('click', () => {
     //カード比較をするためにdatasetから値を取得する
     const openedCardHight = document

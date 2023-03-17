@@ -14,11 +14,32 @@ body {
 .open-card-area img,
 .hidden-card-area img {
   width: 200px;
-
 }
 
 .button-area {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.button-area button {
+  padding: 10px;
+  font-size: 20px;
+  color: white;
+  letter-spacing: 1.9px;
+  border-radius: 4px;
+  width: 100px;
+}
+
+.button-area > .start-button {
+  background-color: #008080;
+  border: 0;
+}
+.row {
+  background-color: #87cefa;
+  border: 0;
+}
+.hight {
+  background-color: #ff7f50;
+  border: 0;
 }
