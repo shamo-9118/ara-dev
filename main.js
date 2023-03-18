@@ -131,8 +131,12 @@ const compareCards = () => {
   // data-setの値を比較してhight or rowを出力
   if (hiddenCardNum < openedCardNum) {
     alert('win! openの方が大きいです')
+    winCount++
+    gameCount++
   } else if (openedCardNum < hiddenCardNum) {
     alert('lose! openの方が小さいです')
+    loseCount++
+    gameCount++
   }
 
   //捨て場にカードを入れる処理
@@ -145,5 +149,7 @@ const compareCards = () => {
 
   showOpenCard(Math.floor(Math.random() * num))
   num--
+
+  // init
   hiddenCardArea.innerHTML = backCard
 }
