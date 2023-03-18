@@ -115,11 +115,9 @@ startButton.addEventListener('click', () => {
 
     showOpenCard(Math.floor(Math.random() * num))
     num--
-    console.log(num)
 
     showHiddenCard(Math.floor(Math.random() * num))
     num--
-    console.log(num)
   })
 
   const rowButton = document.getElementById('row')
@@ -158,6 +156,7 @@ const showOpenCard = (openRandomNum) => {
   openCardArea.innerHTML = pickUpCard(openRandomNum)
 }
 
+//showhiddenカード
 const showHiddenCard = (hiddenRandomNum) => {
   hiddenCardArea.innerHTML = pickUpCard(hiddenRandomNum)
 }
