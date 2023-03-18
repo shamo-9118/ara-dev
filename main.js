@@ -100,30 +100,6 @@ startButton.addEventListener('click', () => {
 
   const rowButton = document.getElementById('row')
   rowButton.addEventListener('click', () => {
-    //カード比較をするためにdatasetから値を取得する
-    const openedCard = document.getElementById('js_openCardArea').children[0]
-    const openedCardHight = openedCard.getAttribute('data-set')
-    const openedCardNum = Number(openedCardHight)
-
-    const hiddenCard = document.getElementById('js_hiddenCardArea').children[0]
-    const hiddenCardHight = hiddenCard.getAttribute('data-set')
-    const hiddenCardNum = Number(hiddenCardHight)
-
-    if (openedCardNum < hiddenCardNum) {
-      alert('win! hiddenの方が小さいです')
-    } else if (hiddenCardNum < openedCardNum) {
-      alert('lose! openの方がの方が大きいです')
-    }
-    const liOpen = document.createElement('li')
-    const liHidden = document.createElement('li')
-    liOpen.appendChild(openedCard)
-    liHidden.appendChild(hiddenCard)
-    cemeteryCardArea.appendChild(liOpen)
-    cemeteryCardArea.appendChild(liHidden)
-
-    showOpenCard(Math.floor(Math.random() * num))
-    num--
-
     showHiddenCard(Math.floor(Math.random() * num))
     num--
   })
