@@ -84,12 +84,9 @@ startButton.addEventListener('click', () => {
   buttonArea.appendChild(hightButtonDiv)
   startButton.setAttribute('hidden', 'hidden')
 
-  const openRandomNum = Math.floor(Math.random() * num)
-  openCard(openRandomNum)
+  showOpenCard(Math.floor(Math.random() * num))
   num--
-
-  const hiddenRandomNum = Math.floor(Math.random() * num)
-  hiddenCard(hiddenRandomNum)
+  showHiddenCard(Math.floor(Math.random() * num))
   num--
 
   const hightButton = document.getElementById('hight')
@@ -116,6 +113,14 @@ startButton.addEventListener('click', () => {
     const ul = document.getElementById('cemetery')
     ul.appendChild(liOpen)
     ul.appendChild(liHidden)
+
+    showOpenCard(Math.floor(Math.random() * num))
+    num--
+    console.log(num)
+
+    showHiddenCard(Math.floor(Math.random() * num))
+    num--
+    console.log(num)
   })
 
   const rowButton = document.getElementById('row')
@@ -141,14 +146,20 @@ startButton.addEventListener('click', () => {
     const ul = document.getElementById('cemetery')
     ul.appendChild(liOpen)
     ul.appendChild(liHidden)
+
+    showOpenCard(Math.floor(Math.random() * num))
+    num--
+
+    showHiddenCard(Math.floor(Math.random() * num))
+    num--
   })
 })
 
-const openCard = (openRandomNum) => {
+const showOpenCard = (openRandomNum) => {
   openCardArea.innerHTML = pickUpCard(openRandomNum)
 }
 
-const hiddenCard = (hiddenRandomNum) => {
+const showHiddenCard = (hiddenRandomNum) => {
   hiddenCardArea.innerHTML = pickUpCard(hiddenRandomNum)
 }
 
