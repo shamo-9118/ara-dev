@@ -57,6 +57,10 @@ const cardList = [
   { name: 'diamond-A', link: './card/card_diamond_01.png', height: 13 },
 ]
 
+//裏面カードのDOM
+const backCard =
+  '<img src="./card/card_back.png" alt="裏面カード" data-set="${cardHeight}">'
+
 //DOMの取得
 const openCardArea = document.getElementById('js_openCardArea')
 const hiddenCardArea = document.getElementById('js_hiddenCardArea')
@@ -64,11 +68,11 @@ const cemeteryCardArea = document.getElementById('js_cemetery')
 const startButton = document.getElementById('start')
 const buttonArea = document.getElementById('js_button-area')
 
-//使い終わったカードをここで収納
-const cemetery = []
-
 //カードの枚数を定義
 let num = 52
+let winCount = 0
+let loseCount = 0
+let gameCount = 0
 
 //スタートボタンを押すことでカード2枚とrow&hightのボタンを出現させてスタートボタンはhiddenにする
 startButton.addEventListener('click', () => {
@@ -86,36 +90,10 @@ startButton.addEventListener('click', () => {
 
   showOpenCard(Math.floor(Math.random() * num))
   num--
-  showHiddenCard(Math.floor(Math.random() * num))
-  num--
+  hiddenCardArea.innerHTML = backCard
 
   const hightButton = document.getElementById('hight')
-
   hightButton.addEventListener('click', () => {
-    //カード比較をするためにdatasetから値を取得する
-    const openedCard = document.getElementById('js_openCardArea').children[0]
-    const openedCardHight = openedCard.getAttribute('data-set')
-    const openedCardNum = Number(openedCardHight)
-
-    const hiddenCard = document.getElementById('js_hiddenCardArea').children[0]
-    const hiddenCardHight = hiddenCard.getAttribute('data-set')
-    const hiddenCardNum = Number(hiddenCardHight)
-
-    if (hiddenCardNum < openedCardNum) {
-      alert('win! hiddenの方が小さいです')
-    } else if (openedCardNum < hiddenCardNum) {
-      alert('lose! openの方がの方が大きいです')
-    }
-    const liOpen = document.createElement('li')
-    const liHidden = document.createElement('li')
-    liOpen.appendChild(openedCard)
-    liHidden.appendChild(hiddenCard)
-    cemeteryCardArea.appendChild(liOpen)
-    cemeteryCardArea.appendChild(liHidden)
-
-    showOpenCard(Math.floor(Math.random() * num))
-    num--
-
     showHiddenCard(Math.floor(Math.random() * num))
     num--
   })
@@ -140,7 +118,6 @@ startButton.addEventListener('click', () => {
     const liHidden = document.createElement('li')
     liOpen.appendChild(openedCard)
     liHidden.appendChild(hiddenCard)
-    const ul = document.getElementById('cemetery')
     cemeteryCardArea.appendChild(liOpen)
     cemeteryCardArea.appendChild(liHidden)
 
@@ -159,36 +136,38 @@ const showOpenCard = (openRandomNum) => {
 //showhiddenカード
 const showHiddenCard = (hiddenRandomNum) => {
   hiddenCardArea.innerHTML = pickUpCard(hiddenRandomNum)
+  setTimeout(compareCards, 1000)
 }
 
 const pickUpCard = (pickUpNumber) => {
   const cardLink = cardList[pickUpNumber].link
   const cardName = cardList[pickUpNumber].name
   const cardHeight = cardList[pickUpNumber].height
-  cardList.splice(pickUpNumber, 1)
-  cemetery.push(cardList[pickUpNumber])
   return `<img src="${cardLink}" alt="${cardName}" data-set="${cardHeight}">`
 }
 
-// rowButton.addEventListener('click', () => {
-//   console.log('hello')
-// })
-// highButton.addEventListener('click', () => {
-//   const openRandomNum = Math.floor(Math.random() * num)
-//   openCard(openRandomNum)
-//   num--
-//   const hiddenRandomNum = Math.floor(Math.random() * num)
-//   hiddenCard(hiddenRandomNum)
-//   num--
-//   compareCards(openRandomNum, hiddenRandomNum)
-// })
+const compareCards = () => {
+  const openedCard = document.getElementById('js_openCardArea').children[0]
+  const openedCardNum = Number(openedCard.getAttribute('data-set'))
+  const hiddenCard = document.getElementById('js_hiddenCardArea').children[0]
+  const hiddenCardNum = Number(hiddenCard.getAttribute('data-set'))
 
-// rowButton.addEventListener('click', () => {
-//   const openRandomNum = Math.floor(Math.random() * num)
-//   openCard(openRandomNum)
-//   num--
-//   const hiddenRandomNum = Math.floor(Math.random() * num)
-//   hiddenCard(hiddenRandomNum)
-//   num--
-//   compareCards(openRandomNum, hiddenRandomNum)
-// })
+  // data-setの値を比較してhight or rowを出力
+  if (hiddenCardNum < openedCardNum) {
+    alert('win! openの方が大きいです')
+  } else if (openedCardNum < hiddenCardNum) {
+    alert('lose! openの方が小さいです')
+  }
+
+  //捨て場にカードを入れる処理
+  const liOpen = document.createElement('li')
+  const liHidden = document.createElement('li')
+  liOpen.appendChild(openedCard)
+  liHidden.appendChild(hiddenCard)
+  cemeteryCardArea.appendChild(liOpen)
+  cemeteryCardArea.appendChild(liHidden)
+
+  showOpenCard(Math.floor(Math.random() * num))
+  num--
+  hiddenCardArea.innerHTML = backCard
+}
