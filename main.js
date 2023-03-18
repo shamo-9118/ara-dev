@@ -60,7 +60,7 @@ const cardList = [
 //DOMの取得
 const openCardArea = document.getElementById('js_openCardArea')
 const hiddenCardArea = document.getElementById('js_hiddenCardArea')
-const cemeteryCardArea = document.getElementById('cemetery')
+const cemeteryCardArea = document.getElementById('js_cemetery')
 const startButton = document.getElementById('start')
 const buttonArea = document.getElementById('js_button-area')
 
@@ -110,9 +110,8 @@ startButton.addEventListener('click', () => {
     const liHidden = document.createElement('li')
     liOpen.appendChild(openedCard)
     liHidden.appendChild(hiddenCard)
-    const ul = document.getElementById('cemetery')
-    ul.appendChild(liOpen)
-    ul.appendChild(liHidden)
+    cemeteryCardArea.appendChild(liOpen)
+    cemeteryCardArea.appendChild(liHidden)
 
     showOpenCard(Math.floor(Math.random() * num))
     num--
@@ -144,8 +143,8 @@ startButton.addEventListener('click', () => {
     liOpen.appendChild(openedCard)
     liHidden.appendChild(hiddenCard)
     const ul = document.getElementById('cemetery')
-    ul.appendChild(liOpen)
-    ul.appendChild(liHidden)
+    cemeteryCardArea.appendChild(liOpen)
+    cemeteryCardArea.appendChild(liHidden)
 
     showOpenCard(Math.floor(Math.random() * num))
     num--
