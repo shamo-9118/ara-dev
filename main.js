@@ -92,19 +92,16 @@ startButton.addEventListener('click', () => {
   hiddenCard(hiddenRandomNum)
   num--
 
-  //比較したあとはcemeteryにappendChildで挿入してulに入れることで捨て札的な扱いで表示できるようにする
   const hightButton = document.getElementById('hight')
 
   hightButton.addEventListener('click', () => {
     //カード比較をするためにdatasetから値を取得する
-    const openedCardHight = document
-      .getElementById('js_openCardArea')
-      .children[0].getAttribute('data-set')
+    const openedCard = document.getElementById('js_openCardArea').children[0]
+    const openedCardHight = openedCard.getAttribute('data-set')
     const openedCardNum = Number(openedCardHight)
 
-    const hiddenCardHight = document
-      .getElementById('js_hiddenCardArea')
-      .children[0].getAttribute('data-set')
+    const hiddenCard = document.getElementById('js_hiddenCardArea').children[0]
+    const hiddenCardHight = hiddenCard.getAttribute('data-set')
     const hiddenCardNum = Number(hiddenCardHight)
 
     if (hiddenCardNum < openedCardNum) {
@@ -112,19 +109,24 @@ startButton.addEventListener('click', () => {
     } else if (openedCardNum < hiddenCardNum) {
       alert('lose! openの方がの方が大きいです')
     }
+    const liOpen = document.createElement('li')
+    const liHidden = document.createElement('li')
+    liOpen.appendChild(openedCard)
+    liHidden.appendChild(hiddenCard)
+    const ul = document.getElementById('cemetery')
+    ul.appendChild(liOpen)
+    ul.appendChild(liHidden)
   })
 
   const rowButton = document.getElementById('row')
   rowButton.addEventListener('click', () => {
     //カード比較をするためにdatasetから値を取得する
-    const openedCardHight = document
-      .getElementById('js_openCardArea')
-      .children[0].getAttribute('data-set')
+    const openedCard = document.getElementById('js_openCardArea').children[0]
+    const openedCardHight = openedCard.getAttribute('data-set')
     const openedCardNum = Number(openedCardHight)
 
-    const hiddenCardHight = document
-      .getElementById('js_hiddenCardArea')
-      .children[0].getAttribute('data-set')
+    const hiddenCard = document.getElementById('js_hiddenCardArea').children[0]
+    const hiddenCardHight = hiddenCard.getAttribute('data-set')
     const hiddenCardNum = Number(hiddenCardHight)
 
     if (openedCardNum < hiddenCardNum) {
@@ -132,6 +134,13 @@ startButton.addEventListener('click', () => {
     } else if (hiddenCardNum < openedCardNum) {
       alert('lose! openの方がの方が大きいです')
     }
+    const liOpen = document.createElement('li')
+    const liHidden = document.createElement('li')
+    liOpen.appendChild(openedCard)
+    liHidden.appendChild(hiddenCard)
+    const ul = document.getElementById('cemetery')
+    ul.appendChild(liOpen)
+    ul.appendChild(liHidden)
   })
 })
 
