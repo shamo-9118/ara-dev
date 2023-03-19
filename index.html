@@ -11,16 +11,27 @@
     <main class="field">
       <!-- ゲームレコードエリアを作成する -->
       <ul id="js_recordArea" class="game-record">
-        <li id ="js_totalCardRecord"></li>
+        <li id="js_totalCardRecord"></li>
         <li id="js_winRecord"></li>
         <li id="js_loseRecord"></li>
         <li id="js_rateRecord"></li>
       </ul>
-      <div class="card-area">
-        <div id="js_openCardArea" class="open-card-area"></div>
-        <div id="js_hiddenCardArea" class="hidden-card-area"></div>
+      <div class="game-area">
+        <div class="card-area">
+          <section id="js_gameDescription" class="description-container">
+            <h2>遊び方</h2>
+            <p>
+              high & lowは2枚のカードの数字が大きいか小さいかを当てるゲーム。<br />
+              裏向きのカード数字が表向きのカードの数字よりも大きいと思ったら「high」、小さいと思ったら「low」と宣言する。裏向きのカードをめくり、宣言が当たった場合は勝ち、外れた場合は負けとなります。
+            </p>
+            <h3>カードの強さ</h3>
+            <span>(弱)2 < 3 < 4 .... J < Q < K < A(強)</span>
+          </section>
+          <div id="js_openCardArea" class="open-card-area"></div>
+          <div id="js_hiddenCardArea" class="hidden-card-area"></div>
+        </div>
         <div id="js_button-area" class="button-area">
-          <button id="start" class="start-button">START</button>
+          <button id="js_startButton" class="start-button">START</button>
         </div>
       </div>
       <div class="cemetery-area">

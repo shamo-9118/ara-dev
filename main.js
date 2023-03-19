@@ -62,16 +62,17 @@ const backCard =
   '<img src="./card/card_back.png" alt="裏面カード" data-set="${cardHeight}">'
 
 //DOMの取得
-const openCardArea = document.getElementById('js_openCardArea')
-const hiddenCardArea = document.getElementById('js_hiddenCardArea')
-const cemeteryCardArea = document.getElementById('js_cemetery')
-const startButton = document.getElementById('start')
-const buttonArea = document.getElementById('js_button-area')
 const recordArea = document.getElementById('js_recordArea')
 const totalCardRecord = document.getElementById('js_totalCardRecord')
-const winRecord = document.getElementById('js_winRecord')
 const loseRecord = document.getElementById('js_loseRecord')
 const rateRecord = document.getElementById('js_rateRecord')
+const winRecord = document.getElementById('js_winRecord')
+const gameDescription = document.getElementById('js_gameDescription')
+const openCardArea = document.getElementById('js_openCardArea')
+const hiddenCardArea = document.getElementById('js_hiddenCardArea')
+const buttonArea = document.getElementById('js_button-area')
+const startButton = document.getElementById('js_startButton')
+const cemeteryCardArea = document.getElementById('js_cemetery')
 
 //カードの枚数を定義
 let totalGameCount = 0
@@ -87,9 +88,9 @@ const resetRecord = () => {
   })
 }
 resetRecord()
-
 //スタートボタンを押すことでカード2枚とrow&hightのボタンを出現させてスタートボタンはhiddenにする
 startButton.addEventListener('click', () => {
+  gameDescription.setAttribute('hidden', 'hidden')
   const buttonName = ['row', 'hight']
   const buttonDom = buttonName.map(
     (name) => `<button class="${name}" id="${name}">${name}</button>`
