@@ -18,6 +18,15 @@ ul > li > img {
   width: 50px;
 }
 
+.game-record {
+  gap: 24px;
+}
+
+.game-record > li {
+  align-self: center;
+  font-size: 18px;
+}
+
 .card-area {
   display: flex;
   flex-direction: column;

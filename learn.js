@@ -1,17 +1,3 @@
-const greeting = () => {
-  say()
-  run()
-}
-
-const say = () => {
-  alert('hello')
-  foo()
-}
-
-const foo = () => {
-  alert('foo')
-}
-
-const run = () => {
-  alert('run')
-}
+const li = document.getElementById('aa')
+text = 'hello'
+li.innerHTML = text

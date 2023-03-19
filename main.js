@@ -67,12 +67,26 @@ const hiddenCardArea = document.getElementById('js_hiddenCardArea')
 const cemeteryCardArea = document.getElementById('js_cemetery')
 const startButton = document.getElementById('start')
 const buttonArea = document.getElementById('js_button-area')
+const recordArea = document.getElementById('js_recordArea')
+const totalCardRecord = document.getElementById('js_totalCardRecord')
+const winRecord = document.getElementById('js_winRecord')
+const loseRecord = document.getElementById('js_loseRecord')
+const rateRecord = document.getElementById('js_rateRecord')
 
 //カードの枚数を定義
-let num = 52
-let winCount = 0
-let loseCount = 0
-let gameCount = 0
+let totalGameCount = 0
+const recordData = [
+  { text: '残り枚数', count: 52, dom: totalCardRecord },
+  { text: '正解数', count: 0, dom: winRecord },
+  { text: '不正解数', count: 0, dom: loseRecord },
+  { text: '勝率', count: 0, dom: rateRecord },
+]
+const resetRecord = () => {
+  recordData.map((data) => {
+    data.dom.textContent = `${data.text}：${data.count}`
+  })
+}
+resetRecord()
 
 //スタートボタンを押すことでカード2枚とrow&hightのボタンを出現させてスタートボタンはhiddenにする
 startButton.addEventListener('click', () => {
@@ -88,28 +102,25 @@ startButton.addEventListener('click', () => {
   buttonArea.appendChild(hightButtonDiv)
   startButton.setAttribute('hidden', 'hidden')
 
-  showOpenCard(Math.floor(Math.random() * num))
-  num--
+  showOpenCard(Math.floor(Math.random() * recordData[0].count))
   hiddenCardArea.innerHTML = backCard
 
   const hightButton = document.getElementById('hight')
   hightButton.addEventListener('click', () => {
-    showHiddenCard(Math.floor(Math.random() * num))
-    num--
+    showHiddenCard(Math.floor(Math.random() * recordData[0].count))
+    recordData[0].count--
   })
 
   const rowButton = document.getElementById('row')
   rowButton.addEventListener('click', () => {
-    showHiddenCard(Math.floor(Math.random() * num))
-    num--
+    showHiddenCard(Math.floor(Math.random() * recordData[0].count))
+    recordData[0].count--
   })
 })
 
 const showOpenCard = (openRandomNum) => {
   openCardArea.innerHTML = pickUpCard(openRandomNum)
 }
-
-//showhiddenカード
 const showHiddenCard = (hiddenRandomNum) => {
   hiddenCardArea.innerHTML = pickUpCard(hiddenRandomNum)
   setTimeout(compareCards, 1000)
@@ -131,12 +142,10 @@ const compareCards = () => {
   // data-setの値を比較してhight or rowを出力
   if (hiddenCardNum < openedCardNum) {
     alert('win! openの方が大きいです')
-    winCount++
-    gameCount++
+    recordData[1].count++
   } else if (openedCardNum < hiddenCardNum) {
     alert('lose! openの方が小さいです')
-    loseCount++
-    gameCount++
+    recordData[2].count++
   }
 
   //捨て場にカードを入れる処理
@@ -147,9 +156,13 @@ const compareCards = () => {
   cemeteryCardArea.appendChild(liOpen)
   cemeteryCardArea.appendChild(liHidden)
 
-  showOpenCard(Math.floor(Math.random() * num))
-  num--
+  showOpenCard(Math.floor(Math.random() * recordData[0].count))
+  recordData[0].count--
 
   // init
   hiddenCardArea.innerHTML = backCard
+  totalGameCount++
+  recordData[3].count = Math.round((recordData[1].count / totalGameCount) * 100)
+
+  resetRecord()
 }
