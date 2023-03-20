@@ -147,13 +147,15 @@ startButton.addEventListener('click', () => {
 
   const hightButton = document.getElementById('hight')
   hightButton.addEventListener('click', () => {
-    showHiddenCard(Math.floor(Math.random() * recordData[0].count))
+    hightButton.disabled = true
+    showHiddenCard(Math.floor(Math.random() * recordData[0].count), hightButton)
     recordData[0].count--
   })
 
   const rowButton = document.getElementById('row')
   rowButton.addEventListener('click', () => {
-    showHiddenCard(Math.floor(Math.random() * recordData[0].count))
+    rowButton.disabled = true
+    showHiddenCard(Math.floor(Math.random() * recordData[0].count), rowButton)
     recordData[0].count--
   })
 })
@@ -161,9 +163,9 @@ startButton.addEventListener('click', () => {
 const showOpenCard = (openRandomNum) => {
   openCardArea.innerHTML = pickUpCard(openRandomNum)
 }
-const showHiddenCard = (hiddenRandomNum) => {
+const showHiddenCard = (hiddenRandomNum, button) => {
   hiddenCardArea.innerHTML = pickUpCard(hiddenRandomNum)
-  setTimeout(compareCards, 1000)
+  setTimeout(compareCards(button), 1000)
 }
 
 const pickUpCard = (pickUpNumber) => {
@@ -174,7 +176,7 @@ const pickUpCard = (pickUpNumber) => {
   return `<img src="${cardLink}" alt="${cardName}" data-set="${cardHeight}" data-mark="${cardMark}">`
 }
 
-const compareCards = () => {
+const compareCards = (button) => {
   const openedCard = document.getElementById('js_openCardArea').children[0]
   const openedCardNum = Number(openedCard.getAttribute('data-set'))
   const hiddenCard = document.getElementById('js_hiddenCardArea').children[0]
@@ -214,6 +216,6 @@ const compareCards = () => {
   hiddenCardArea.innerHTML = backCard
   totalGameCount++
   recordData[3].count = Math.round((recordData[1].count / totalGameCount) * 100)
-
+  button.disabled = false
   resetRecord()
 }

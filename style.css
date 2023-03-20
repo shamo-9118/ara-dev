@@ -45,7 +45,7 @@ ul > li > img {
 .description-container {
   width: 60%;
   max-width: 740px;
-  margin: 130px auto;
+  margin: 60px auto 0;
   padding: 30px;
   border: 2px solid;
   border-radius: 4px;
