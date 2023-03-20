@@ -165,7 +165,7 @@ const showOpenCard = (openRandomNum) => {
 }
 const showHiddenCard = (hiddenRandomNum, button) => {
   hiddenCardArea.innerHTML = pickUpCard(hiddenRandomNum)
-  setTimeout(compareCards(button), 1000)
+  setTimeout(() => compareCards(button), 1000)
 }
 
 const pickUpCard = (pickUpNumber) => {
