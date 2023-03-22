@@ -79,13 +79,13 @@ ul > li > img {
   border: 0;
 }
 
-.row {
-  background-color: #87cefa;
+.low {
+  background-color: #4bb7fa;
   border: 0;
 }
 
-.hight {
-  background-color: #ff7f50;
+.high {
+  background-color: #ff6933;
   border: 0;
 }
 
