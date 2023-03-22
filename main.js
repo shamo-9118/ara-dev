@@ -127,28 +127,28 @@ const resetRecord = () => {
   })
 }
 resetRecord()
-//スタートボタンを押すことでカード2枚とrow&hightのボタンを出現させてスタートボタンはhiddenにする
+//スタートボタンを押すことでカード2枚とrow&highのボタンを出現させてスタートボタンはhiddenにする
 startButton.addEventListener('click', () => {
   gameDescription.setAttribute('hidden', 'hidden')
-  const buttonName = ['row', 'hight']
+  const buttonName = ['row', 'high']
   const buttonDom = buttonName.map(
     (name) => `<button class="${name}" id="${name}">${name}</button>`
   )
   const rowButtonDiv = document.createElement('div')
-  const hightButtonDiv = document.createElement('div')
+  const highButtonDiv = document.createElement('div')
   rowButtonDiv.innerHTML = buttonDom[0]
-  hightButtonDiv.innerHTML = buttonDom[1]
+  highButtonDiv.innerHTML = buttonDom[1]
   buttonArea.appendChild(rowButtonDiv)
-  buttonArea.appendChild(hightButtonDiv)
+  buttonArea.appendChild(highButtonDiv)
   startButton.setAttribute('hidden', 'hidden')
 
   showOpenCard(Math.floor(Math.random() * recordData[0].count))
   hiddenCardArea.innerHTML = backCard
 
-  const hightButton = document.getElementById('hight')
-  hightButton.addEventListener('click', () => {
-    hightButton.disabled = true
-    showHiddenCard(Math.floor(Math.random() * recordData[0].count), hightButton)
+  const highButton = document.getElementById('high')
+  highButton.addEventListener('click', () => {
+    highButton.disabled = true
+    showHiddenCard(Math.floor(Math.random() * recordData[0].count), highButton)
     recordData[0].count--
   })
 
@@ -184,7 +184,7 @@ const compareCards = (button) => {
   const openedCardMark = Number(openedCard.getAttribute('data-mark'))
   const hiddenCardMark = Number(openedCard.getAttribute('data-mark'))
 
-  // data-setの値を比較してhight or rowを出力
+  // data-setの値を比較してhigh or rowを出力
   if (hiddenCardNum === openedCardNum) {
     if (hiddenCardMark < openedCardMark) {
       alert('win! openの方が大きいです')
