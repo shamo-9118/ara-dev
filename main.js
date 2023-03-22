@@ -187,17 +187,17 @@ const compareCards = (button) => {
   // data-setの値を比較してhigh or lowを出力
   if (hiddenCardNum === openedCardNum) {
     if (hiddenCardMark < openedCardMark) {
-      alert('win! openの方が大きいです')
+      alert('lose! openの方が大きいです')
       recordData[1].count++
     } else if (openedCardMark < hiddenCardMark) {
-      alert('lose! openの方が小さいです')
+      alert('win! openの方が大きいです')
       recordData[2].count++
     }
   } else if (hiddenCardNum < openedCardNum) {
-    alert('win! openの方が大きいです')
+    alert('lose! openの方が小さいです')
     recordData[1].count++
   } else if (openedCardNum < hiddenCardNum) {
-    alert('lose! openの方が小さいです')
+    alert('win! closedの方が大きいです')
     recordData[2].count++
   }
 
