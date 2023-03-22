@@ -116,10 +116,10 @@ const cemeteryCardArea = document.getElementById('js_cemetery')
 //カードの枚数を定義
 let totalGameCount = 0
 const recordData = [
-  { text: '残り枚数', count: 52, dom: totalCardRecord },
+  { text: '残り枚数(枚)', count: 52, dom: totalCardRecord },
   { text: '正解数', count: 0, dom: winRecord },
   { text: '不正解数', count: 0, dom: loseRecord },
-  { text: '勝率', count: 0, dom: rateRecord },
+  { text: '勝率(%)', count: 0, dom: rateRecord },
 ]
 const resetRecord = () => {
   recordData.map((data) => {
